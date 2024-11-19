@@ -79,29 +79,28 @@ function isLoginEmpty() {
         return true
     }
 }
+// التحقق إذا كان الموقع مستضافًا على GitHub Pages
+var isGithubPages = window.location.hostname.includes('github.io');
+var baseURL = isGithubPages ? '/repository-name' : '';
+
+// تغيير التوجيه عند تسجيل الدخول
 function login() {
     if (isLoginEmpty() == false) {
-        document.getElementById('incorrect').innerHTML = '<span class="text-danger m-3">All inputs is required</span>'
-        return false
+        document.getElementById('incorrect').innerHTML = '<span class="text-danger m-3">All inputs is required</span>';
+        return false;
     }
-    var password = signinPassword.value
-    var email = signinEmail.value
+    var password = signinPassword.value;
+    var email = signinEmail.value;
     for (var i = 0; i < signUpArray.length; i++) {
         if (signUpArray[i].email.toLowerCase() == email.toLowerCase() && signUpArray[i].password.toLowerCase() == password.toLowerCase()) {
-            localStorage.setItem('sessionUsername', signUpArray[i].name)
-            if (baseURL == '/') {
-                location.replace('https://' + 'mustafa1234425.github.io' + 'login.html')
-
-            } else {
-                location.replace('login.html');
-
-            }
-        } else {
-            document.getElementById('incorrect').innerHTML = '<span class="p-2 text-danger">incorrect email or password</span>'
+            localStorage.setItem('sessionUsername', signUpArray[i].name);
+            location.replace(baseURL + '/login.html');
+            return;
         }
     }
-
+    document.getElementById('incorrect').innerHTML = '<span class="p-2 text-danger">incorrect email or password</span>';
 }
+
 // for logout
 function logout() {
     localStorage.removeItem('sessionUsername')
