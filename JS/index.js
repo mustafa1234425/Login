@@ -79,9 +79,8 @@ function isLoginEmpty() {
         return true
     }
 }
-// التحقق إذا كان الموقع مستضافًا على GitHub Pages
-var isGithubPages = window.location.hostname.includes('github.io');
-var baseURL = isGithubPages ? '/repository-name' : '';
+// حساب baseURL بشكل ديناميكي
+var baseURL = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, "");
 
 // تغيير التوجيه عند تسجيل الدخول
 function login() {
@@ -100,6 +99,7 @@ function login() {
     }
     document.getElementById('incorrect').innerHTML = '<span class="p-2 text-danger">incorrect email or password</span>';
 }
+
 
 // for logout
 function logout() {
