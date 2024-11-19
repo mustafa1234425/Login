@@ -89,13 +89,17 @@ function login() {
     for (var i = 0; i < signUpArray.length; i++) {
         if (signUpArray[i].email.toLowerCase() == email.toLowerCase() && signUpArray[i].password.toLowerCase() == password.toLowerCase()) {
             localStorage.setItem('sessionUsername', signUpArray[i].name)
-            if (baseURL == '/') {
-                location.replace('https://' + 'mustafa1234425.github.io' + 'login.html')
+            // if (baseURL == '/') {
+            //     location.replace('https://' + mustafa1234425.github.io + 'login.html')
 
-            } else {
-                location.replace('login.html');
+            // } else {
+            //     location.replace('login.html');
 
-            }
+            // }
+
+            var baseURL = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, "");
+            location.replace(baseURL + '/login.html');
+
         } else {
             document.getElementById('incorrect').innerHTML = '<span class="p-2 text-danger">incorrect email or password</span>'
         }
