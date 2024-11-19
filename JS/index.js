@@ -97,8 +97,14 @@ function login() {
 
             // }
 
-            var baseURL = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, "");
+            // var baseURL = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, "");
+            // location.replace(baseURL + '/login.html');
+
+
+            var isGithubPages = window.location.hostname.includes('github.io');
+            var baseURL = isGithubPages ? '/repository-name' : '';
             location.replace(baseURL + '/login.html');
+
 
         } else {
             document.getElementById('incorrect').innerHTML = '<span class="p-2 text-danger">incorrect email or password</span>'
